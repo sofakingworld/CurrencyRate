@@ -1,0 +1,26 @@
+= form_tag( admin_force_path, method: "post") do |f|
+  .row
+    .col.s12.center
+      p.orange.darken-3
+        =flash[:params]
+  .row
+    .col.s6
+      .teal.lighten-3
+        p Информация по курсу
+      br
+    
+      = label_tag(:second_currency_type_id, 'Валюта')
+      = select_tag(:second_currency_type_id, options_from_collection_for_select(CurrencyType.where.not(external_id: nil), :id, :nominal_and_title, @prev ? @prev[:currency] : nil))
+      br
+      = label_tag(:rate_value, 'Курс')
+      = number_field_tag :rate_value, @prev ? @prev[:rate] : nil,class: :text_field, step: :any
+    .col.s6
+      .teal.lighten-3
+        p Форсировать до:
+      br
+    
+      = label_tag(:valid_till_date, 'Дата')
+      = text_field_tag :date, @prev ? @prev[:valid_till_date] : nil, class: :datetime
+      = label_tag(:valid_till_time, 'Время')
+      = text_field_tag(:time, @prev ? @prev[:valid_till_time] : nil, class: :timepicker)
+  = submit_tag("Форсировать курс", class: 'btn')

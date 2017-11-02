@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title
+      | currencies
+    
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = action_cable_meta_tag
+  body
+    .container
+      nav
+        .nav-wrapper.teal.lighten-2
+          a.brand-logo.left.logo href="/" 
+          a.brand-logo.center
+            
+          ul#nav.right
+            = react_component("HeaderRatesContainer", {currencies: CurrencyType.where(char_code: ['USD', 'EUR']), data: currency_current_rate(CurrencyType.where(char_code: ['USD','EUR']).ids)})
+      = yield
+      .center
+        a href="https://www.cbr-xml-daily.ru/" Курсы ЦБ РФ в XML и JSON, API
