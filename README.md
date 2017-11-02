@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[EXAMPLE AT HEROKU](https://rub-currency-rate.herokuapp.com)
 
-Things you may want to cover:
+## First of all clone this repository and install foreman gem  
+```bash
+gem install foreman
+```
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## secondary run
+```bash
+foreman start -c install
+```
+## That will install application
+## sample user and password for /admin panel  
+email: funbox_test@valute.ru  
+pwd: funbox  
+ 
+## run application by 
+```bash
+foreman start -c start
+```
