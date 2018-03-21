@@ -3,9 +3,14 @@ require 'rufus-scheduler'
 scheduler = Rufus::Scheduler.new
 
 scheduler.every '6h' do |job|
-    cbk_job("http://www.cbr.ru/scripts/XML_daily.asp?date_req=#{(Date.today).strftime("%d/%m/%Y")}")
-end
-
+    CurrencyRate.delete_all
+    
+    100.times do |i|
+        print "#{i}/100 \r"
+        cbk_job("http://www.cbr.ru/scripts/XML_daily.asp?date_req=#{(Date.today-i).strftime("%d/%m/%Y")}")
+    end
+end   
+    
 def cbk_job(url)
     response = HTTParty.get(url) 
     logger = Logger.new('./log/cbk.log', 'weekly')
